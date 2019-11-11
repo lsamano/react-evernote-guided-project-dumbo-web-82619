@@ -16,7 +16,7 @@ class NoteContainer extends Component {
     .then(res => res.json())
     .then(userArray => {
       this.setState({
-        allNotes: userArray[0].notes
+        allNotes: userArray[0].notes.reverse()
       })
     })
   }
@@ -38,7 +38,7 @@ class NoteContainer extends Component {
 
   postNoteInAllNotes = newNote => {
     this.setState({
-      allNotes: [ ...this.state.allNotes, newNote ]
+      allNotes: [ newNote, ...this.state.allNotes ]
     })
   }
 
