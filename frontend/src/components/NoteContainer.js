@@ -38,7 +38,9 @@ class NoteContainer extends Component {
 
   postNoteInAllNotes = newNote => {
     this.setState({
-      allNotes: [ newNote, ...this.state.allNotes ]
+      allNotes: [ newNote, ...this.state.allNotes ],
+      mode: "edit",
+      chosenNote: newNote
     })
   }
 
@@ -57,6 +59,23 @@ class NoteContainer extends Component {
     })
       .then(res => res.json())
       .then(this.postNoteInAllNotes)
+  }
+
+  deleteNote = noteToDelete => {
+    fetch(`http://localhost:3000/api/v1/notes/${noteToDelete.id}`, {
+      method: "DELETE"
+    })
+      .then(this.deleteNoteInAllNotes(noteToDelete))
+  }
+
+  deleteNoteInAllNotes = noteToRemove => {
+    const newArray = this.state.allNotes.filter(note => note.id !== noteToRemove.id)
+    
+    this.setState({
+      allNotes: newArray,
+      mode: "",
+      chosenNote: {}
+    })
   }
 
   handleSearchTermChange = event => {
@@ -95,6 +114,7 @@ class NoteContainer extends Component {
             patchNoteInAllNotes={this.patchNoteInAllNotes}
             mode={this.state.mode}
             toggleMode={this.toggleMode}
+            deleteNote={this.deleteNote}
            />
         </div>
       </Fragment>

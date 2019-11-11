@@ -16,7 +16,7 @@ class Content extends Component {
     if (this.props.mode === "edit") {
       return <NoteEditor chosenNote={this.props.chosenNote} toggleMode={this.props.toggleMode} patchNoteInAllNotes={this.props.patchNoteInAllNotes} />;
     } else if (this.props.mode === "view") {
-      return <NoteViewer chosenNote={this.props.chosenNote} toggleMode={this.props.toggleMode} />;
+      return <NoteViewer chosenNote={this.props.chosenNote} toggleMode={this.props.toggleMode} deleteNote={this.props.deleteNote} />;
     } else {
       return <Instructions />;
     }
