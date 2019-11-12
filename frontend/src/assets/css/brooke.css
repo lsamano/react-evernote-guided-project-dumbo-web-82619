@@ -133,6 +133,7 @@ div.sidebar ul li:hover {
   margin: 10px 0px;
   padding: 20px;
   border: 2px dashed grey;
+  white-space: pre-line;
 }
 
 .sidebar {

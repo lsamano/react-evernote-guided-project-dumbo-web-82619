@@ -65,11 +65,12 @@ class NoteContainer extends Component {
     fetch(`http://localhost:3000/api/v1/notes/${noteToDelete.id}`, {
       method: "DELETE"
     })
-      .then(this.deleteNoteInAllNotes(noteToDelete))
+    .then(res => res.json())
+      .then(res => this.deleteNoteInAllNotes(res.noteId))
   }
 
-  deleteNoteInAllNotes = noteToRemove => {
-    const newArray = this.state.allNotes.filter(note => note.id !== noteToRemove.id)
+  deleteNoteInAllNotes = noteIdToRemove => {
+    const newArray = this.state.allNotes.filter(note => note.id !== noteIdToRemove)
     
     this.setState({
       allNotes: newArray,
